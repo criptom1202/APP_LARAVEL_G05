@@ -21,7 +21,7 @@ class CreateEmpleadosTable extends Migration
             $table->enum('sexo', ['M', 'F']);
             $table->date('fecha_cont');
             $table->timestamps();
-            
+            //comentando            
         });
     }
 

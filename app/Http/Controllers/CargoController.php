@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Cargo;
 
 class CargoController extends Controller
 {
@@ -13,8 +14,13 @@ class CargoController extends Controller
      */
     public function index()
     {
+        $cargo = Cargo::all();
+        //$cargo = Cargo::where('id', 3)
+        //->get();
+
+        //return $cargo;
         //return "página principal del cargo";
-        return view('cargo.index');
+        return view('cargo.index', compact('cargo'));
     }
 
     /**

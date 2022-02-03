@@ -13,10 +13,16 @@
         </header>
         <main>
             <h1>NUEVO CARGO</h1>
-            <form action="">
-                <input type="text"><br>
-                <input type="text"><br>
-                <input type="submit">
+            <form action="{{ route('cargo.store') }}" method="POST">
+                <label for="">Cargo:  <br>
+                    <input type="text" name="cargo" placeholder="Ingrese cargo">
+                </label><br>
+
+                <label for="">Descripción: <br>
+                    <textarea name="descripcion" placeholder="Ingrese descripción de cargo"></textarea>
+                </label><br>
+                
+                <input type="submit" value="GUARDAR">
             </form>
         </main>
         <footer>

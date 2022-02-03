@@ -61,7 +61,8 @@ class RouteServiceProvider extends ServiceProvider
 
 
     protected function mapSistemaRoutes(){
-        Route::namespace($this->namespace)
+        Route::middleware('web')
+            ->namespace($this->namespace)
             ->group(base_path('routes/intranet/sistema.php'));
     }
 

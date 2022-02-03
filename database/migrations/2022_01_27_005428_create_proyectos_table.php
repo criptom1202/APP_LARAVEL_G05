@@ -28,6 +28,7 @@ class CreateProyectosTable extends Migration
 
         DB::statement("ALTER TABLE proyectos ADD CONSTRAINT uni_proyecto UNIQUE (proyecto)");
 
+        
     }
 
     /**

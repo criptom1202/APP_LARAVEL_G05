@@ -14,13 +14,13 @@ class CargoController extends Controller
      */
     public function index()
     {
-        $cargo = Cargo::all();
+        $cargos = Cargo::all();
         //$cargo = Cargo::where('id', 3)
         //->get();
 
         //return $cargo;
         //return "página principal del cargo";
-        return view('cargo.index', compact('cargo'));
+        return view('cargo.index', compact('cargos'));
     }
 
     /**
@@ -41,7 +41,21 @@ class CargoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //return $request->all();
+        //return $request->cargo;
+
+        // $cargo = new Cargo();
+        // $cargo->cargo = $request->cargo;
+        // $cargo->descripcion = $request->descripcion;
+        // $cargo->save();
+
+
+        $cargo = Cargo::create($request->all());
+
+
+        return redirect()->route('cargo.index');
+
+
     }
 
     /**
@@ -61,9 +75,13 @@ class CargoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id = null)
+    public function edit($id)
     {
-        return view('cargo.edit');
+        //return $cargo;
+
+        $cargo = Cargo::find($id);
+        //return $cargo;
+        return view('cargo.edit', compact('cargo'));
     }
 
     /**
@@ -75,7 +93,12 @@ class CargoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $cargo = Cargo::find($id);
+        $cargo->cargo = $request->cargo;
+        $cargo->descripcion = $request->descripcion;
+        $cargo->save();
+        return redirect()->route('cargo.index');
+
     }
 
     /**

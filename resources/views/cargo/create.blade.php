@@ -7,19 +7,33 @@
 </head>
 <body>
     
+
+    <x-alerta/>
+     <!--notación: kebab-case-->
+
+
     <div>
         <header>
             Menú de opciones
         </header>
+
         <main>
             <h1>NUEVO CARGO</h1>
             <form action="{{ route('cargo.store') }}" method="POST">
+                @csrf
                 <label for="">Cargo:  <br>
-                    <input type="text" name="cargo" placeholder="Ingrese cargo">
+                    <input type="text" name="cargo" placeholder="Ingrese cargo" value="{{ old('cargo') }}">
+                    @error('cargo')
+                        <li>{{ $message }}</li>
+                    @enderror
+
                 </label><br>
 
                 <label for="">Descripción: <br>
-                    <textarea name="descripcion" placeholder="Ingrese descripción de cargo"></textarea>
+                    <textarea name="descripcion" placeholder="Ingrese descripción de cargo">{{ old('descripcion') }}</textarea>
+                    @error('descripcion')
+                        <li>{{ $message }}</li>
+                    @enderror
                 </label><br>
                 
                 <input type="submit" value="GUARDAR">
@@ -32,5 +46,7 @@
     
     </div>
 
+   
+    {{-- dd(old()) --}}
 </body>
 </html>

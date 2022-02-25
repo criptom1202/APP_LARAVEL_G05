@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Cargo;
 
+use App\Http\Requests\StoreCargoRequest;
+
 class CargoController extends Controller
 {
     /**
@@ -39,8 +41,10 @@ class CargoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCargoRequest $request)
     {
+        $validated = $request->validated();
+
         //return $request->all();
         //return $request->cargo;
 
@@ -49,13 +53,8 @@ class CargoController extends Controller
         // $cargo->descripcion = $request->descripcion;
         // $cargo->save();
 
-
         $cargo = Cargo::create($request->all());
-
-
-        return redirect()->route('cargo.index');
-
-
+        return redirect()->route('cargo.index')->with('estado', 'Se registró exitosamente el cargo: ' . $request->cargo);
     }
 
     /**
@@ -64,7 +63,7 @@ class CargoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id = null)
+    public function show($id)
     {
         return "página de detalles de un cargo en específico";
     }
@@ -75,13 +74,10 @@ class CargoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Cargo $cargo)
     {
-        //return $cargo;
 
-        $cargo = Cargo::find($id);
-        //return $cargo;
-        return view('cargo.edit', compact('cargo'));
+       return view('cargo.edit', compact('cargo'));
     }
 
     /**
@@ -91,14 +87,20 @@ class CargoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Cargo $cargo)
     {
-        $cargo = Cargo::find($id);
-        $cargo->cargo = $request->cargo;
-        $cargo->descripcion = $request->descripcion;
-        $cargo->save();
-        return redirect()->route('cargo.index');
 
+        $request->validate([
+            'cargo' => 'required|max:50|unique:cargos,cargo,'.$cargo->id,
+            'descripcion' => 'required'
+        ]);
+
+        $cargo->update($request->all());
+        // $cargo = Cargo::find($id);
+        // $cargo->cargo = $request->cargo;
+        // $cargo->descripcion = $request->descripcion;
+        // $cargo->save();
+        return redirect()->route('cargo.index');
     }
 
     /**
@@ -107,8 +109,10 @@ class CargoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Cargo $cargo)
     {
-        //
+        //$cargo = Cargo::find($id);
+        $cargo->delete();
+        return redirect()->route('cargo.index');
     }
 }

@@ -9,6 +9,5 @@ class Cargo extends Model
 {
     use HasFactory;
 
-    protected $fillable = [ 'cargo' , 'descripcion'];
-    
+    protected $fillable = [ 'cargo' , 'descripcion'];    
 }

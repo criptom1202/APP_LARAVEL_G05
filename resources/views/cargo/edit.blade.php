@@ -11,13 +11,23 @@
         <header>
             Menú de opciones
         </header>
+
+        @if($errors->any())
+            <div>
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+
         <main>
             <h1>EDICIÓN DE CARGO</h1>
             <form action="{{ route('cargo.update', $cargo->id ) }}" method="POST">
                 @csrf
                 @method('PUT')
-
-
                 <label for="">Id: <br>
                     <input type="text" name="id" value="{{ $cargo->id }}">
                 </label><br>

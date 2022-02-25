@@ -10,6 +10,10 @@
         <header>
             Menú de opciones
         </header>
+
+        <x-sesion-estado/>
+
+
         <main>
             <h1>PÁGINA PRINCIPAL DE CARGO</h1>
 
@@ -29,9 +33,15 @@
                             <td>{{ $cargo->id }}</td>
                             <td>{{ $cargo->cargo }}</td>
                             <td>{{ $cargo->descripcion }}</td>
-                            <td><a href="{{ route('cargo.show') }}">Ver</a></td>
-                            <td><a href="{{ route('cargo.edit', $cargo->id ) }}">Editar</a></td>
-                            <td><a href="">Eliminar</a></td>
+                            <td><a href="{{ route('cargo.show', $cargo ) }}">Ver</a></td>
+                            <td><a href="{{ route('cargo.edit', $cargo ) }}">Editar</a></td>
+                            <td>
+                                <form action="{{ route('cargo.destroy',$cargo ) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input type="submit" value="ELIMINAR">
+                                </form>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

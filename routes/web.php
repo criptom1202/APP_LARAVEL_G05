@@ -59,3 +59,11 @@ Route::get('emp', function(){
 // Route::get('mostrar3/{id}', [CargoController::class, 'mostrarDatos3']);
 
 // Route::get('mostrar4', CargoDosController::class );
+
+Route::get('prueba', function(){
+    return view('prueba');
+});
+
+Route::get('test2', function(){
+    return view('prueba2');
+});

@@ -1,0 +1,19 @@
+.div-container{
+    @apply container mx-auto w-10/12;
+}
+
+.titulo-formulario{
+    @apply text-4xl font-bold py-10;
+}
+
+.btn-azul{
+    @apply rounded-full py-2 px-7 bg-blue-900 text-white hover:bg-red-800;
+}
+
+.th-tabla{
+    @apply px-4 py-3 bg-blue-900 text-white;
+}
+
+.tbody-tabla{
+    @apply divide-y-2 divide-gray-200 divide-solid text-sm;
+}

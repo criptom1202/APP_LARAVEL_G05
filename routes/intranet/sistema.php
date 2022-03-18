@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CargoController;
+use App\Http\Controllers\EmpleadoController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -22,6 +23,7 @@ Route::prefix('intranet')->group(function(){
 
 
     Route::resource('cargo', CargoController::class)->names('cargo');
+    Route::resource('empleados', EmpleadoController::class)->names('empleado');
 
 
 });

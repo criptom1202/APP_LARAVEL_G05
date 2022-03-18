@@ -1,54 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-    <div>
-        <header>
-            Menú de opciones
-        </header>
+<x-layout>
+    <x-slot name="principal">
+        <div class="div-container">
 
-        @if($errors->any())
-            <div>
-                <ul>
-                    @foreach($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+        <h1 class="titulo-formulario">ACTUALIZAR CARGO</h1>
 
 
-        <main>
-            <h1>EDICIÓN DE CARGO</h1>
             <form action="{{ route('cargo.update', $cargo->id ) }}" method="POST">
                 @csrf
                 @method('PUT')
-                <label for="">Id: <br>
-                    <input type="text" name="id" value="{{ $cargo->id }}">
+
+                <label for="">Id:<br>
+                    <input type="text" name="id" value="{{ $cargo->id }}" class="inputs w-1/4" readonly>
                 </label><br>
 
-                <label for="">Cargo:  <br>
-                    <input type="text" name="cargo" placeholder="Ingrese cargo" value="{{ $cargo->cargo }}">
+
+                <label for="">Cargo:<br>
+                    <input type="text" name="cargo" placeholder="Ingrese cargo" value="{{ old('cargo', $cargo->cargo ) }}" class="inputs w-1/4">
+                    @error('cargo')
+                        <li>{{ $message }}</li>
+                    @enderror
+
                 </label><br>
 
                 <label for="">Descripción: <br>
-                    <textarea name="descripcion" placeholder="Ingrese descripción de cargo">{{ $cargo->descripcion }}</textarea>
+                    <textarea name="descripcion" placeholder="Ingrese descripción de cargo" class="inputs w-1/2 h-40">{{ old('descripcion', $cargo->descripcion ) }}</textarea>
+                    @error('descripcion')
+                        <li>{{ $message }}</li>
+                    @enderror
                 </label><br>
                 
-                <input type="submit" value="GUARDAR">
+                <div class="flex flex-row w-1/2">
+                    <a href="{{ route('cargo.index') }}" class="boton-gris">Atrás</a>
+                    <input type="submit" value="ACTUALIZAR" class="boton-azul">
+                  
+                </div>
+                
             </form>
-        </main>
-        <footer>
-            <p>Todos los Derechos Reservados &COPY; 2022 </p>
-        </footer>
-
+        
+        </div>
     
-    </div>
+    </x-slot>
 
-</body>
-</html>
+</x-layout>
